@@ -1,45 +1,41 @@
 #include<iostream>
-#include <cstdlib>
-#include <ctime>
-
+#include<cstdlib>
+#include<ctime>
 using namespace std;
+int main() {
+	srand(time(0));
+	int index = rand() % 10;
+	string words[] = { "award", "await", "attend", "bubble", "coding", "spring", "mango", "night", "orange", "reward" };
+	string word = words[index];
+	int n = word.length();
+	string guess = "";
+	for (int i = 0; i < n; ++i) {
+		guess = guess + '_';
+		cout << "_ ";
+	}
+	bool guess_correct=false;
+	for (int i = 0; i < n + 2; ++i) {
+		char letter;
+		cout << "\nGuess a letter: ";
+		cin >> letter;
 
-int main()
-{
-    srand(time(0));
-    int index = rand() % 10;
-    string words[] = { "award", "await", "attend", "bubble", "coding", "spring", "mango", "night", "orange", "reward" };
-    string correct_word = words[index];
-    int n = correct_word.length();
-    string guessed_word = "";
-    
-    for (int i = 0; i <n; i++) {
-        guessed_word = guessed_word + '_';
-        cout << "_ ";
+		for (int j = 0; j < n; ++j) {
+			if (letter == word[j]) {
+				guess[j] = letter;
+			}
+			cout << guess[j] << " ";
+		}
+		if (guess == word) {
+			guess_correct = true;
+			break;
+		}
+	}
+	if (guess_correct == true) {
+		cout << "\nyou guessed it correct" << endl;
+	}
+	if (guess_correct == false) {
+		cout << "The word was: " << word << endl;
+	}
 
-    }
-
-    bool correctly_guessed = false;
-    for (int i = 0; i < n + 2; i++) {
-        char letter;
-        cout << "\nguess a letter\n";
-        cin >> letter;
-
-        for (int j = 0; j < n; j++) {
-            if (letter == correct_word[j]) {
-                guessed_word[j] = letter;
-            }
-            cout << guessed_word[j] << " ";
-        }
-        if (guessed_word == correct_word) {
-            cout << "\nYou guessed it correct!" << endl;
-            correctly_guessed = true;
-            break;
-        }
-    }
-    if (correctly_guessed == false) {
-        cout << "\nThe actual word was " << correct_word << endl;
-    }
-
-    return 0;
+	return 0;
 }
